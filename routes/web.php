@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\Verification\VerificationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,10 +20,19 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::get('/', function () {
-    return view('Admin.index');
-});
+// Route::get('/', function () {
+//     return view('Admin.index');
+// });
 
-//REGISTRATION ROUTE
+//DASHBOARD ROUTE
+Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+//REGISTRATION & LOGIN ROUTE
 Route::get('/admin/register', [RegisterController::class, 'index'])->name('admin.register');
+Route::post('/admin/register', [RegisterController::class, 'store'])->name('admin.store');
 Route::get('/admin/login', [LoginController::class, 'index'])->name('admin.login');
+
+//EMAIL VERIFICATION ROUTE
+Route::get('/email/verify', [VerificationController::class, 'index'])->name('verification.notice');
+Route::get('email/verify/{id}', [VerificationController::class, 'store'])->name('verification.verify');
+Route::post('email/resend', [VerificationController::class, 'resend'])->name('verification.resend');
