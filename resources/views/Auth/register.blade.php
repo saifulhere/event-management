@@ -62,12 +62,22 @@
                 @enderror
             </div>
             <div class="form-wrapper">
-                <label for="" class="label-input">Password</label>
-                <input type="password" class="form-control">
+                <label for="Password confirmation" class="label-input">Password</label>
+                <input type="password" name="password" class="form-control">
+                @error('password')
+                    <div class="text-danger">
+                        {{$message}}
+                    </div>
+                @enderror
             </div>
             <div class="form-wrapper">
                 <label for="" class="label-input">Repeat Password</label>
-                <input type="password" class="form-control">
+                <input type="password" name="password_confirmation" class="form-control">
+                @error('password_confirmation')
+                    <div class="text-danger">
+                        {{$message}}
+                    </div>
+                @enderror
             </div>
             <button type="submit">Register User</button>
         </form>

@@ -31,6 +31,7 @@ Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('das
 Route::get('/admin/register', [RegisterController::class, 'index'])->name('admin.register');
 Route::post('/admin/register', [RegisterController::class, 'store'])->name('admin.store');
 Route::get('/admin/login', [LoginController::class, 'index'])->name('admin.login');
+Route::post('/admin/login', [LoginController::class, 'store']);
 
 //EMAIL VERIFICATION ROUTE
 Route::get('/email/verify', [VerificationController::class, 'index'])->name('verification.notice');
