@@ -2,7 +2,7 @@
 @section('content')
 <div class="wrapper register">
     <div class="inner mx-auto">
-        <form action="{{route('admin.store')}}" method="POST">
+        <form class="registration-form" action="{{route('admin.store')}}" method="POST">
             @csrf
             <h3>Register New User</h3>
             <div class="form-wrapper">
