@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\Verification\VerificationController;
 use App\Http\Controllers\FrontEnd\HomeController;
@@ -28,6 +29,7 @@ Route::get('/admin/register', [RegisterController::class, 'index'])->name('admin
 Route::post('/admin/register', [RegisterController::class, 'store'])->name('admin.store');
 Route::get('/admin/login', [LoginController::class, 'index'])->name('admin.login');
 Route::post('/admin/login', [LoginController::class, 'store']);
+Route::post('/admin/logout', [LogoutController::class, 'logout'])->name('logout');
 
 //EMAIL VERIFICATION ROUTE
 Route::get('/email/verify', [VerificationController::class, 'index'])->name('verification.notice');
