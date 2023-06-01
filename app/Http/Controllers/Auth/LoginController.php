@@ -8,6 +8,17 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
+    protected function authenticated(Request $request, $user)
+    {
+        if (!$user->hasVerifiedEmail()) {
+            $user->sendEmailVerificationNotification();
+            Auth::logout();
+
+            return redirect()->route('verification.notice')
+                ->with('warning', 'You need to verify your email first. We have sent you another verification email.');
+        }
+    }
+
     public function __construct()
     {
         $this->middleware(['guest']);
@@ -15,14 +26,6 @@ class LoginController extends Controller
     public function index()
     {
         return view('Auth.login');
-    }
-
-    protected function authenticated(Request $request, $user)
-    {
-        if ($user && !$user->email_verified_at) {
-            auth()->logout();
-            return redirect()->route('verification.notice')->with('warning', 'You need to verify your email first.');
-        }
     }
 
     public function store(Request $request)

@@ -8,7 +8,7 @@
                 <div class="hero-text">
                     <span>5 to 9 may 2019, mardavall hotel, New York</span>
                     <h2>Change Your Mind<br /> To Become Sucess</h2>
-                    <a href="{{route('admin.login')}}" class="primary-btn">Join Event</a>
+                    <a href="{{route('login')}}" class="primary-btn">Join Event</a>
                 </div>
             </div>
             <div class="col-lg-5">

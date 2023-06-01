@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth\Verification;
 
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -24,12 +25,13 @@ class VerificationController extends Controller
     }
     public function resend(Request $request)
     {
-        if($request->user()->hasVerifiedEmail()){
+        
+        if(!$request->user()->email_verified_at === null){
             return redirect()->route('dashboard');
         }
 
         $request->user()->sendEmailVerificationNotification();
 
-        return back()->with('resent', true);
+        return back()->with('resent', 'We have sent you an fresh verification email. Please verify!');
     }
 }

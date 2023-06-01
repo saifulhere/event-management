@@ -59,7 +59,7 @@
                     </nav>
                 </div>
                 <div>
-                    <a href="{{route('admin.login')}}" class="primary-btn top-btn"><i class="fa fa-ticket"></i>Join Event</a>
+                    <a href="{{route('login')}}" class="primary-btn top-btn"><i class="fa fa-ticket"></i>Join Event</a>
                 </div>
             <div id="mobile-menu-wrap"></div>
         </div>

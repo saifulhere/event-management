@@ -27,7 +27,7 @@ Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('das
 //REGISTRATION & LOGIN ROUTE
 Route::get('/admin/register', [RegisterController::class, 'index'])->name('admin.register');
 Route::post('/admin/register', [RegisterController::class, 'store'])->name('admin.store');
-Route::get('/admin/login', [LoginController::class, 'index'])->name('admin.login');
+Route::get('/admin/login', [LoginController::class, 'index'])->name('login');
 Route::post('/admin/login', [LoginController::class, 'store']);
 Route::post('/admin/logout', [LogoutController::class, 'logout'])->name('logout');
 
