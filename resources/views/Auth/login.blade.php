@@ -1,65 +1,90 @@
 @extends('layouts.front')
 @section('content')
-    <div class="verification">
-        <div class="card-body verification-form pt-6 p-2">
-            <h3 class="font-bold fw-bold text-center">Login to</h3>
-            @if(session()->has('status'))
-            <div class="bg-red rounded-md text-dark text-center py-3 mt-3 mb-6">
-                {{session('status')}}
-            </div>
+<section class="h-100 gradient-form" style="background-color: #050262;">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-xl-5 shadow-lg">
+          <div class="card rounded-3 text-black">
+            <div class="row g-0">
+              <div class="col-lg-12">
+                <div class="card-body p-md-5 mx-md-4">
+  
+                  <div class="text-center">
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
+                      style="width: 185px;" alt="logo">
+                    <h4 class="mt-1 mb-5 pb-1">We are W3 Relations Team</h4>
+                    @if(session()->has('status'))
+                        <div class="bg-red text-white rounded-lg">
+                            {{session('status')}}
+                        </div>
+                    @endif
+                  </div>
+  
+                  <form action="{{route('login')}}" method="POST">
+                        @csrf
+                        <p>Please login to your account</p>
 
-            @endif
-            <form class="registration-form" action="{{ route('login')}}" method="POST">
-                @csrf
-                <div class="form-wrapper">
-                    <label for="Email" class="text-dark label-input">Email</label>
-                    <input type="email" name="email" value="{{old('email')}}" class="input-bg form-control">
-                    @error('email')
-                        <div class="text-danger">
-                            {{$message}}
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="Email address">Enter Your Email Address</label>
+                            <input type="email" name="email" id="form2Example11" class="form-control"
+                            placeholder="Enter Email" />
                         </div>
-                    @enderror
-                </div>
-                <div class="form-wrapper">
-                    <label for="Email" class="label-input text-dark">Password</label>
-                    <input type="password" name="password" value="{{old('email')}}" class="input-bg form-control">
-                    @error('password')
-                        <div class="text-danger">
-                            {{$message}}
+
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="password">Password</label>
+                            <input type="password" name="password" id="form2Example22" class="form-control" placeholder="Enter Your password" />
                         </div>
-                    @enderror
+
+                        <div class="text-center pt-1 mb-5 pb-1">
+                        <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">Login</button>
+                        <a class="text-muted" href="#!">Forgot password?</a>
+                        </div>
+
+                        <div class="d-flex align-items-center justify-content-center pb-4">
+                        <p class="mb-0 me-2">Don't have an account?</p>
+                        <button type="button" class="btn btn-outline-danger ml-3">Create new</button>
+                        </div>
+  
+                  </form>
+  
                 </div>
-                <div class="d-flex justify-content-between">
-                    <p class="text-center fw-bold">Foget password?</p>
-                    <p class="text-center fw-bold">Reset Password</p>
+              </div>
+              {{-- <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+                <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                  <h4 class="mb-4">We are more than just a company</h4>
+                  <p class="small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                 </div>
-                <div class="flex p-6 pt-3 items-end">
-                    <button type="submit" class="btn btn-success text-white">Login</button>
-                </div>
-            </form>
+              </div> --}}
+            </div>
+          </div>
         </div>
-        <style>
-            .verification{
-                background: #050262;
-                height: 100vh;
-                vertical-align: center;
-                padding-top: 100px !important;
-            }
-            .input-bg{
-                background: #050262;
-            }
-            .verification-form{
-                margin-top: 100px;
-                margin: auto;
-                background: #fff;
-                width: 30% !important;
-                justify-content: center;
-                border-radius: 20px;
-            }
-            .verification-form>form{
-                width:100%;
-                background: none;
-            }
-        </style>
+      </div>
     </div>
+    <style>
+        .gradient-custom-2 {
+/* fallback for old browsers */
+background: #fccb90;
+
+/* Chrome 10-25, Safari 5.1-6 */
+background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+
+/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+}
+
+@media (min-width: 768px) {
+.gradient-form {
+height: 100vh !important;
+}
+}
+@media (min-width: 769px) {
+.gradient-custom-2 {
+border-top-right-radius: .3rem;
+border-bottom-right-radius: .3rem;
+}
+}
+    </style>
+  </section>
 @endsection

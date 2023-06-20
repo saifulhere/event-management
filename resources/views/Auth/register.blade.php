@@ -1,89 +1,148 @@
 @extends('layouts.front')
 @section('content')
-<div class="wrapper register">
-    <div class="inner mx-auto">
-        <form class="registration-form" action="{{route('admin.store')}}" method="POST">
-            @csrf
-            <h3>Register New User</h3>
-            <div class="form-wrapper">
-                <label for="" class="label-input">Name</label>
-                <input type="text" name="name" value="{{old('name')}}" class="form-control">
-                @error('name')
-                    <div class="text-danger">
-                        {{$message}}
-                    </div>
-                @enderror
-            </div>
-            <div class="form-wrapper">
-                <label for="Username" class="label-input">Username</label>
-                <input type="text" name="username" value="{{old('username')}}" class="form-control">
-                @error('username')
-                    <div class="text-danger">
-                        {{$message}}
-                    </div>
-            @enderror
-            </div>
-            <div class="form-wrapper">
-                <input type="hidden" name="status" value="active" class="form-control">
-            </div>
-            <div class="form-wrapper form-select">
-                <label for="User Type">User Type</label>
-                <div class="form-holder">
-                    <select name="user_type" id="" style="width:220px;" class="form-control">
-                        <option value="" class="option">Select user type</option>
-                        <option value="admin" class="option">Administrator</option>
-                        <option value="manager" class="option">Event Manager</option>
-                        <option value="user" class="option">User</option>
-                    </select>
-                    <i class="zmdi zmdi-chevron-down"></i>
-                </div>
-                @error('user_type')
-                    <div class="text-danger">
-                        {{$message}}
-                    </div>
-                @enderror
-            </div>
-            <div class="form-wrapper">
-                <label for="Email" class="label-input">Email</label>
-                <input type="email" name="email" value="{{old('email')}}" class="form-control">
-                @error('email')
-                        <div class="text-danger">
-                            {{$message}}
+<section class="h-100 gradient-form" style="background-color: #050262;">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-xl-6 shadow-lg">
+          <div class="card rounded-3 text-black">
+            <div class="row g-0">
+              <div class="col-lg-12">
+                <div class="card-body p-md-5 mx-md-4">
+                  <div class="text-center">
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
+                      style="width: 185px;" alt="logo">
+                    <h4 class="mt-1 mb-5 pb-1">We are W3 Relations Team</h4>
+                  </div>
+  
+                  <form action="{{route('admin.store')}}" method="POST">
+                    @csrf
+                    <p>Provide Necessary Information below</p>
+  
+                    <div class="d-flex justify-content-between">
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="name">Full name</label>
+                            <input type="text" id="form2Example11" name="name" value="{{old('name')}}" class="form-control"
+                              placeholder="Your name" />
+                            @error('name')
+                                <div class="text-danger">
+                                    {{$message}}
+                                </div>
+                            @enderror
                         </div>
-                @enderror
-            </div>
-            <div class="form-wrapper">
-                <label for="Phone" class="label-input">Phone</label>
-                <input type="text" name="phone" value="{{old('phone')}}" class="form-control">
-                @error('phone')
-                    <div class="text-danger">
-                        {{$message}}
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="form2Example11">User Type</label>
+                            <select style="width: 190px;" required name="user_type" class="form-select form-control" id="form2Example11" aria-label="Default select example">
+                                <option selected>Select User Type</option>
+                                <option value="admin">Administrator</option>
+                                <option value="manager">Event Manager</option>
+                                <option value="user">User</option>
+                            </select>
+                            @error('user_type')
+                                <div class="text-danger">
+                                    {{$message}}
+                                </div>
+                            @enderror
+                        </div>
+
                     </div>
-                @enderror
-            </div>
-            <div class="form-wrapper">
-                <label for="Password confirmation" class="label-input">Password</label>
-                <input type="password" name="password" class="form-control">
-                @error('password')
-                    <div class="text-danger">
-                        {{$message}}
+                    <div class="d-flex justify-content-between">
+                        <div class="form-outline">
+                            <input type="hidden" id="form2Example11" name="status" value="active" class="form-control"
+                              placeholder="Phone number or email address" />
+                        </div>
                     </div>
-                @enderror
-            </div>
-            <div class="form-wrapper">
-                <label for="" class="label-input">Repeat Password</label>
-                <input type="password" name="password_confirmation" class="form-control">
-                @error('password_confirmation')
-                    <div class="text-danger">
-                        {{$message}}
+                    <div class="d-flex justify-content-between">
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="name">Email</label>
+                            <input type="email" id="form2Example11" name="email" value="{{old('email')}}" class="form-control"
+                              placeholder="example@mail.com" />
+                            @error('email')
+                                <div class="text-danger">
+                                    {{$message}}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="username">Phone</label>
+                            <input type="text" id="form2Example11" name="phone" value="{{old('phone')}}" class="form-control"
+                              placeholder="Enter phone" />
+                            @error('phone')
+                                <div class="text-danger">
+                                    {{$message}}
+                                </div>
+                            @enderror
+                        </div>
                     </div>
-                @enderror
+                    <div class="d-flex justify-content-between">
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="password">Password</label>
+                            <input type="password" id="form2Example11" name="password"  class="form-control"
+                            placeholder="Enter Password"/>
+                            @error('password')
+                                <div class="text-danger">
+                                    {{$message}}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="password_confirmation">Repeat Password</label>
+                            <input type="password" id="form2Example11" name="password_confirmation" class="form-control"
+                            placeholder="Repeat Password"/>
+                            @error('password_confirmation')
+                                <div class="text-danger">
+                                    {{$message}}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="text-center pt-1 mb-5 pb-1">
+                      <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">Register</button>
+                    </div>
+  
+                    <div class="d-flex align-items-center justify-content-center pb-4">
+                      <p class="mb-0 me-2">Already have an account?</p>
+                      <button type="button" class="btn btn-outline-danger ml-3">Login</button>
+                    </div>
+  
+                  </form>
+                </div>
+              </div>
+              {{-- <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+                <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                  <h4 class="mb-4">We are more than just a company</h4>
+                  <p class="small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+              </div> --}}
             </div>
-            <button type="submit">Register User</button>
-        </form>
-        <div class="image-holder">
-            <img src="{{asset('images/registration-form-5.jpg')}}" alt="">
+          </div>
         </div>
+      </div>
     </div>
-</div>
+    <style>
+        .gradient-custom-2 {
+        /* fallback for old browsers */
+        background: #fccb90;
+
+        /* Chrome 10-25, Safari 5.1-6 */
+        background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+        }
+
+        @media (min-width: 768px) {
+        .gradient-form {
+        height: 100vh !important;
+        }
+        }
+        @media (min-width: 769px) {
+        .gradient-custom-2 {
+        border-top-right-radius: .3rem;
+        border-bottom-right-radius: .3rem;
+        }
+        }
+    </style>
+  </section>
 @endsection

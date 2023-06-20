@@ -2,8 +2,17 @@
 @section('content')
     <div class="verification">
         <div class="card-body verification-form pt-6">
-            <h3 class="font-bold text-center">Verify your email</h3>
-            <p class="text-center font-2xl">We have sent you an email verification notification in your provided email address</p>
+            <h3 class="font-bold text-center">Reset Password</h3>
+            <p class="text-center font-2xl">Enter your email below to send password reset link.</p>
+            <div class="form-wrapper">
+                <label for="Email" class="text-dark label-input">Email</label>
+                <input type="email" name="email" value="{{old('email')}}" class="input-bg form-control">
+                @error('email')
+                    <div class="text-danger">
+                        {{$message}}
+                    </div>
+                @enderror
+            </div>
             
             @if(session()->has('resent'))
             <div class="bg-red-500 rounded-md text-danger text-center py-3 mt-3 mb-6  font-medium">
