@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\Passwords\PasswordController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\Verification\VerificationController;
+use App\Http\Controllers\Frontend\HeroSectionController;
 use App\Http\Controllers\FrontEnd\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -41,3 +42,11 @@ Route::post('email/resend', [VerificationController::class, 'resend'])->name('ve
 
 //PASSWORD RESET ROUTES
 Route::get('/password/forgot-password', [PasswordController::class, 'index'])->name('password.request');
+
+
+//HERO SECTION MANAGEMENT
+Route::group(['prefix' => 'admin'], function(){
+    Route::get('/hero-section', [HeroSectionController::class, 'index'])->name('hero');
+    Route::post('/hero-section', [HeroSectionController::class, 'store']);
+    Route::post('/hero-section/update', [HeroSectionController::class, 'update'])->name('update.hero');
+});

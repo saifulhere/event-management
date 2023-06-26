@@ -15,4 +15,9 @@ class DashboardController extends Controller
     {
         return view('Admin.index');
     }
+
+    public function event()
+    {
+        return view('Admin.Events.event');
+    }
 }

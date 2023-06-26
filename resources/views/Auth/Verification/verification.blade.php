@@ -13,7 +13,7 @@
             @endif
             <form class="text-center" action="{{ route('verification.resend')}}" method="POST">
                 @csrf
-                <p class="text-center fw-bold">Didn't receive a code?</p>
+                <p class="text-center fw-bolder">Didn't receive a code?</p>
                     <div class="flex p-6 pt-3 items-end">
                         <button type="submit" class="btn btn-success text-white">Resend</button>
                     </div>
