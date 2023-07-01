@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\Passwords\PasswordController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\Verification\VerificationController;
+use App\Http\Controllers\FrontEnd\AboutController;
 use App\Http\Controllers\Frontend\HeroSectionController;
 use App\Http\Controllers\FrontEnd\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -49,4 +50,7 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/hero-section', [HeroSectionController::class, 'index'])->name('hero');
     Route::post('/hero-section', [HeroSectionController::class, 'store']);
     Route::post('/hero-section/update', [HeroSectionController::class, 'update'])->name('update.hero');
+    Route::get('/about-events', [AboutController::class, 'index'] )->name('about');
+    Route::post('/about-events', [AboutController::class, 'store'])->name('about.store');
+    Route::post('/about-events/update', [AboutController::class, 'update'])->name('about.update');
 });

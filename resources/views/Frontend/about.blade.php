@@ -9,17 +9,34 @@
             </div>
             <div class="col-lg-6">
                 <div class="ha-text">
-                    <h2>About Conference</h2>
-                    <p>When I first got into the online advertising business, I was looking for the magical
+                    <p>@if(isset($about) && !empty($about->sub_heading))
+                        {{$about->sub_heading}}
+                        @else {{'sub heading'}}
+                        @endif
+                    </p>
+                    <h2>@if(isset($about) && !empty($about->heading))
+                        {{$about->heading}}
+                        @else {{'Heading'}}
+                        @endif
+                    </h2>
+                    <p>@if(isset($about) && !empty($about->description))
+                        {{$about->description}}
+                        @else {{'When I first got into the online advertising business, I was looking for the magical
                         combination that would put my website into the top search engine rankings, catapult me to
                         the forefront of the minds or individuals looking to buy my product, and generally make me
                         rich beyond my wildest dreams! After succeeding in the business for this long, I’m able to
-                        look back on my old self with this kind of thinking and shake my head.</p>
+                        look back on my old self with this kind of thinking and shake my head.'}}
+                        @endif
+                    </p>
                     <ul>
-                        <li><span class="icon_check"></span> Write On Your Business Card</li>
-                        <li><span class="icon_check"></span> Advertising Outdoors</li>
-                        <li><span class="icon_check"></span> Effective Advertising Pointers</li>
-                        <li><span class="icon_check"></span> Kook 2 Directory Add Url Free</li>
+                        @if(isset($about) && !empty($about->features))
+                            @foreach ($about->features as $feature)
+                                <li><span class="icon_check"></span> {{ $feature->feature }}</li>
+                            @endforeach
+                        
+                        @else
+                            <li><span class="icon_check"></span> Event Features goes here </li>
+                        @endif
                     </ul>
                     <a href="#" class="ha-btn">Discover Now</a>
                 </div>
