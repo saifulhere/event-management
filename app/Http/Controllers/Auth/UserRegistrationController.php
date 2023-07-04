@@ -7,23 +7,17 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
-class RegisterController extends Controller
+class UserRegistrationController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(['auth', 'verified', 'admin']);
-    }
-    
     public function index()
     {
-        return view('Auth.register');
+        return view('Auth.User.signup');
     }
 
     public function store(Request $request)
     {
         $this->validate($request, [
             'name'      => 'required',
-            'user_type' => 'required',
             'email'     => 'required|unique:users,email',
             'phone'     => 'required',
             'password'  => 'required|confirmed'
@@ -32,13 +26,22 @@ class RegisterController extends Controller
         $user = User::create([
             'name'      => $request->name,
             'status'    => $request->status,
-            'user_type' => $request->user_type,
+            'user_type' => 'user',
             'email'     => $request->email,
             'phone'     => $request->phone,
             'password'  => Hash::make($request->password),
         ]);
 
-        $user->sendEmailVerificationNotification();
-        return redirect()->route('verification.notice');
+
+        $credentials    = $request->only('email', 'password');
+
+        if (auth()->attempt($credentials)) 
+        {
+            return redirect()->route('user.dashboard');
+        } 
+        else 
+        {
+            return redirect()->back()->with('status', 'Invalid login details!');
+        }
     }
 }

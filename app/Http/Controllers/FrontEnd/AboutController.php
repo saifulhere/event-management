@@ -144,4 +144,13 @@ class AboutController extends Controller
 
         return redirect()->route('about')->with('status', 'About Updated Successfully');
     }
+
+    public function feature(Request $request, $id)
+    {
+        $feature    = Features::find($id);
+
+        $feature->delete();
+
+        return redirect()->back()->with('status', 'Feature removed successfully');
+    }
 }

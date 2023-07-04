@@ -13,19 +13,19 @@
                     <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
                       style="width: 185px;" alt="logo">
                     <h4 class="mt-1 mb-3 pb-1">W3 Relations Team</h4>
-                    <p class="text-center mb-5">Administrator Login</p>
+                    <p class="text-center mb-5">User Account Login.</p>
                     @if(session()->has('status'))
-                        <div class="bg-red text-white rounded-lg">
+                        <div class="bg-danger p-3 text-white rounded-lg">
                             {{session('status')}}
                         </div>
-                      @elseif(session()->has('warning'))
-                        <div class="bg-red text-white rounded-lg">
-                          {{session('warning')}}
+                    @elseif(session()->has('warning'))
+                        <div class="bg-danger p-3 text-white rounded-lg">
+                            {{session('warning')}}
                         </div>
                     @endif
                   </div>
   
-                  <form action="{{route('admin.login')}}" method="POST">
+                  <form action="{{route('login')}}" method="POST">
                         @csrf
 
                         <div class="form-outline mb-4">
@@ -53,14 +53,6 @@
   
                 </div>
               </div>
-              {{-- <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
-                <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-                  <h4 class="mb-4">We are more than just a company</h4>
-                  <p class="small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                </div>
-              </div> --}}
             </div>
           </div>
         </div>
