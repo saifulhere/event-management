@@ -13,6 +13,8 @@ use App\Http\Controllers\Frontend\HeroSectionController;
 use App\Http\Controllers\FrontEnd\HomeController;
 use App\Http\Controllers\User\UserDashboardController;
 use App\Http\Controllers\Auth\UserLoginController;
+use App\Http\Controllers\User\BookEventController;
+use App\Http\Controllers\User\UserProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -61,12 +63,23 @@ Route::post('/passord/reset', [ResetPasswordController::class, 'store'])->name('
 
 //HERO SECTION MANAGEMENT
 Route::group(['prefix' => 'admin'], function(){
-    Route::get('/hero-section', [HeroSectionController::class, 'index'])->name('hero');
-    Route::post('/hero-section', [HeroSectionController::class, 'store']);
-    Route::post('/hero-section/update', [HeroSectionController::class, 'update'])->name('update.hero');
-    Route::get('/about-events', [AboutController::class, 'index'] )->name('about');
-    Route::post('/about-events', [AboutController::class, 'store'])->name('about.store');
-    Route::post('/about-events/update', [AboutController::class, 'update'])->name('about.update');
 
-    Route::get('/events/feature/{id}', [AboutController::class, 'feature'])->name('features.destroy');
+Route::get('/hero-section', [HeroSectionController::class, 'index'])->name('hero');
+Route::post('/hero-section', [HeroSectionController::class, 'store']);
+Route::post('/hero-section/update', [HeroSectionController::class, 'update'])->name('update.hero');
+Route::get('/about-events', [AboutController::class, 'index'] )->name('about');
+Route::post('/about-events', [AboutController::class, 'store'])->name('about.store');
+Route::post('/about-events/update', [AboutController::class, 'update'])->name('about.update');
+
+Route::get('/events/feature/{id}', [AboutController::class, 'feature'])->name('features.destroy');
+
+
+});
+
+//USER DASHBOARD ROUTE
+Route::group(['prefix' => 'user'], function(){
+    Route::post('/book-event', [BookEventController::class, 'store'])->name('book.event');
+    Route::get('/profile', [UserProfileController::class, 'index'])->name('user.profile');
+    Route::get('/edit/profile', [UserProfileController::class, 'edit'])->name('edit.profile');
+    Route::get('/booked/event', [BookEventController::class, 'bookedEvent'])->name('booked.event');
 });

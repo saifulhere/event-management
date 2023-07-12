@@ -41,12 +41,6 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-between">
-                        <div class="form-outline">
-                            <input type="hidden" id="form2Example11" name="status" value="active" class="form-control"
-                              placeholder="Phone number or email address" />
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-between">
                         <div class="form-outline mb-4">
                             <label class="form-label" for="name">Email</label>
                             <input type="email" id="form2Example11" name="email" value="{{old('email')}}" class="form-control"

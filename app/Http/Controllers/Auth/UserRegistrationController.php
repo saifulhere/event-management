@@ -23,12 +23,16 @@ class UserRegistrationController extends Controller
             'password'  => 'required|confirmed'
         ]);
 
+        $sanitizedName  = strip_tags($request->name);
+        $sanitizedEmail = strip_tags($request->email);
+        $sanitizedPhone = strip_tags($request->phone);
+
         $user = User::create([
-            'name'      => $request->name,
-            'status'    => $request->status,
+            'name'      => $sanitizedName,
+            'status'    => 'active',
             'user_type' => 'user',
-            'email'     => $request->email,
-            'phone'     => $request->phone,
+            'email'     => $sanitizedEmail,
+            'phone'     => $sanitizedPhone,
             'password'  => Hash::make($request->password),
         ]);
 

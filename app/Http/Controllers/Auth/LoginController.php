@@ -47,7 +47,14 @@ class LoginController extends Controller
             'password'  => 'required',
         ]);
 
-        $credentials    = $request->only('email', 'password');
+        $sanitizedEmail     = strip_tags($request->email);
+        $sanitizedPassword  = strip_tags($request->password);
+
+        $credentials    = [
+            'email'     => $sanitizedEmail,
+            'password'  => $sanitizedPassword
+        ];
+
         if (auth()->attempt($credentials)) 
         {
             $user = Auth::user();
