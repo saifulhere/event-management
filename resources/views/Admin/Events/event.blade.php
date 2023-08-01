@@ -41,4 +41,144 @@
         </form>
     </div>
 </div>
+
+{{-- EVENT ORGANIZER INFORMATION SETTING START --}}
+<div class="card mt-10">
+    <div class="card-body">
+        <div class="text-center fw-bolder mb-2"><h1>Organizer Information</h1></div>
+        @if(session('success'))
+           <div class="alert alert-success text-center"> {{session('success')}} </div>
+        @endif
+        @if(session('fail'))
+        <div class="alert alert-danger text-center"> {{session('fail')}} </div>
+     @endif
+        @if($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        <form action="@if(isset($organizer)){{route('update.organizer')}} @else {{route('organizer')}} @endif" method="POST" enctype="multipart/form-data" >
+            @csrf
+            <div class="row mt-10">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="name">Organizer Name</label>
+                        <input type="text" class="form-control" id="name" name="organizer_name" value="@if(isset($organizer)) {{ $organizer->organizer_name }} @endif" placeholder="Enter organizer name">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="text">Organizer Tagline</label>
+                        <input type="text" class="form-control" id="email" name="organizer_tagline" value="@if(isset($organizer)){{$organizer->tag_line}}@endif" placeholder="Organizer tagline...">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <label for="text">About Organizer</label>
+                    <textarea name="about_organizer" class="form-control" placeholder="About organizer">@if (isset($organizer)) {{ $organizer->about_organizer}} @endif</textarea>
+                </div>
+                <div class="col-md-6 mt-2">
+                    <div class="form-group">
+                        <label for="text">Organizer Phone</label>
+                        <input type="text" class="form-control" id="email" name="organizer_phone" value="@if(isset($organizer)){{$organizer->phone}}@endif" placeholder="Enter Heading text">
+                    </div>
+                </div>
+                <div class="col-md-6 mt-2">
+                    <div class="form-group">
+                        <label for="text">Organizer Email</label>
+                        <input type="email" class="form-control" id="email" name="organizer_email" value="@if(isset($organizer)){{$organizer->email}}@endif" placeholder="Enter Heading text">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="align-items-end">
+                        @if(isset($organizer))
+                        <button type="submit" class="btn btn-primary shadow-lg">Update</button>
+                        @else
+                        <button type="submit" class="btn btn-primary shadow-lg">Save</button>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{{-- EVENT ORGANIZER INFORMATION SETTING START --}}
+
+
+{{-- EVENT TIME, LOCATION AND OTHER NECESSARY INFORMATION START --}}
+<div class="card mt-10">
+    <div class="card-body">
+        <div class="text-center fw-bolder mb-2"><h1>Event Time, Location & Others Info.</h1></div>
+        @if(session('event'))
+           <div class="alert alert-success text-center"> {{session('event')}} </div>
+        @endif
+        @if(session('wrong'))
+        <div class="alert alert-danger text-center"> {{session('wrong')}} </div>
+     @endif
+        @if($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        <form action="@if(isset($event)){{route('update.event')}} @else {{route('event')}} @endif" method="POST" enctype="multipart/form-data" >
+            @csrf
+            <div class="row mt-10">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="name">Event Title</label>
+                        <input type="text" class="form-control" id="name" name="title" value="@if(isset($event)) {{ $event->title }} @endif" placeholder="Enter organizer name">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="text">Event Location</label>
+                        <input type="text" class="form-control" id="email" name="location" value="@if(isset($event)){{$event->location}}@endif" placeholder="Organizer tagline...">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="name">Event Start Date & Time</label>
+                        <input type="datetime-local" class="form-control" id="name" name="start_date" value="@if(isset($event)) {{ $event->start_date }} @endif" placeholder="Enter organizer name">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="text">Event End Date & Time</label>
+                        <input type="datetime-local" class="form-control" id="email" name="end_date" value="@if(isset($event)){{$event->end_date}}@endif" placeholder="Organizer tagline...">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="name">Booking Start Date & Time</label>
+                        <input type="datetime-local" class="form-control" id="name" name="booking_start" value="@if(isset($event)) {{ $event->booking_start }} @endif" placeholder="Enter organizer name">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="text">Booking End Date & Time</label>
+                        <input type="datetime-local" class="form-control" id="email" name="booking_end" value="@if(isset($event)){{$event->booking_end}}@endif" placeholder="Organizer tagline...">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="align-items-end">
+                        @if(isset($event))
+                        <button type="submit" class="btn btn-primary shadow-lg">Update</button>
+                        @else
+                        <button type="submit" class="btn btn-primary shadow-lg">Save</button>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{{-- EVENT TIME, LOCATION AND OTHER NECESSARY INFORMATION END --}}
+
 @endsection

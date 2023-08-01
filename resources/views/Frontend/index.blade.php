@@ -3,6 +3,7 @@
 @include('Frontend.hero')
 @include('Frontend.count-down')
 @include('Frontend.about')
+@include('Frontend.event-time-organiger')
 <!-- Team Member Section Begin -->
 <section class="team-member-section">
     <div class="container">

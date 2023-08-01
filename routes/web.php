@@ -72,6 +72,11 @@ Route::post('/about-events', [AboutController::class, 'store'])->name('about.sto
 Route::post('/about-events/update', [AboutController::class, 'update'])->name('about.update');
 
 Route::get('/events/feature/{id}', [AboutController::class, 'feature'])->name('features.destroy');
+//ORGANIZER INFORMATION
+Route::post('organizer-info', [HeroSectionController::class, 'organizerInfo'])->name('organizer');
+Route::post('organizer-info/update', [HeroSectionController::class, 'organizerUpdate'])->name('update.organizer');
+Route::post('event-info', [HeroSectionController::class, 'event'])->name('event');
+Route::post('event-info/update', [HeroSectionController::class, 'eventUpdate'])->name('update.event');
 
 
 });

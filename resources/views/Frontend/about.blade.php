@@ -8,7 +8,7 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="ha-text">
+                <div class="ha-text" style="padding-top: 10px;">
                     <p>@if(isset($about) && !empty($about->sub_heading))
                         {{$about->sub_heading}}
                         @else {{'sub heading'}}
