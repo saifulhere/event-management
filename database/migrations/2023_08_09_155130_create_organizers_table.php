@@ -13,13 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('book_events', function (Blueprint $table) {
+        Schema::create('organizers', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->integer('age')->nullable();
-            $table->integer('passing_year');
-            $table->integer('quantity')->default(1);
-            $table->string('payment_status')->default('pending');
+            $table->string('name')->nullable();
+            $table->string('tagline')->nullable();
+            $table->string('about')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('email')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();
 
@@ -34,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('book_events');
+        Schema::dropIfExists('organizers');
     }
 };

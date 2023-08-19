@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Carbon;
+use App\Models\EventFeature;
 
 
 class HeroSectionController extends Controller
@@ -23,7 +24,8 @@ class HeroSectionController extends Controller
     {
         $hero = Hero::latest()->first();
         $organizer = Organizer::latest()->first();
-        return view('Admin.Events.event', compact('hero', 'organizer'));
+        $event      = Event::latest()->first();
+        return view('Admin.Events.event', compact('hero', 'organizer', 'event'));
     }
 
     public function store(Request $request)
@@ -214,6 +216,19 @@ class HeroSectionController extends Controller
             'booking_end'   => $formattedBookingEndDateTime
         ]);
 
+        $newFeatures = $request->input('new_features', []);
+
+        foreach ($newFeatures as $newFeature) {
+            if (!empty($newFeature)) {
+                $event->features()->create([
+                    'event_id' => $event->id,
+                    'feature' => $newFeature]);
+            }
+        }
+
+
+        $event->save();
+
         if ( $event) {
             return redirect()->back()->with('event', 'Event info set successfully');
         }else{
@@ -254,6 +269,28 @@ class HeroSectionController extends Controller
         $event->booking_start = $formattedBookingDateTime;
         $event->booking_end   = $formattedBookingEndDateTime;
 
+
+        $updatedFeatures = $request->input('features', []);
+
+        foreach ($updatedFeatures as $featureId => $featureData) {
+            if (!empty($featureData['feature'])) {
+                $feature = EventFeature::find($featureId);
+
+                if ($feature) {
+                    $feature->feature = $featureData['feature'];
+                    $feature->save();
+                }
+            }
+        }
+
+        $newFeatures = $request->input('new_features', []);
+
+        foreach ($newFeatures as $newFeature) {
+            if (!empty($newFeature)) {
+                $event->features()->create(['feature' => $newFeature]);
+            }
+        }
+
         $update = $event->update();
 
         if ($update){
@@ -262,6 +299,15 @@ class HeroSectionController extends Controller
         else{
             return redirect()->back()->with('wrong', 'Something went wrong!');
         }
+    }
+
+    public function feature(Request $request, $id)
+    {
+        $feature    = EventFeature::find($id);
+
+        $feature->delete();
+
+        return redirect()->back()->with('status', 'Feature removed successfully');
     }
 
 }

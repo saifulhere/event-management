@@ -13,6 +13,10 @@ use App\Http\Controllers\Frontend\HeroSectionController;
 use App\Http\Controllers\FrontEnd\HomeController;
 use App\Http\Controllers\User\UserDashboardController;
 use App\Http\Controllers\Auth\UserLoginController;
+use App\Http\Controllers\EventManager\EventController;
+use App\Http\Controllers\EventManager\GuestController;
+use App\Http\Controllers\EventManager\OrganizerController;
+use App\Http\Controllers\EventManager\SocialMediaController;
 use App\Http\Controllers\User\BookEventController;
 use App\Http\Controllers\User\UserProfileController;
 use Illuminate\Support\Facades\Route;
@@ -71,12 +75,35 @@ Route::get('/about-events', [AboutController::class, 'index'] )->name('about');
 Route::post('/about-events', [AboutController::class, 'store'])->name('about.store');
 Route::post('/about-events/update', [AboutController::class, 'update'])->name('about.update');
 
-Route::get('/events/feature/{id}', [AboutController::class, 'feature'])->name('features.destroy');
+Route::get('/about/feature/{id}', [AboutController::class, 'feature'])->name('features.destroy');
+Route::get('/events/feature/{id}', [HeroSectionController::class, 'feature'])->name('event.features.destroy');
 //ORGANIZER INFORMATION
 Route::post('organizer-info', [HeroSectionController::class, 'organizerInfo'])->name('organizer');
 Route::post('organizer-info/update', [HeroSectionController::class, 'organizerUpdate'])->name('update.organizer');
 Route::post('event-info', [HeroSectionController::class, 'event'])->name('event');
 Route::post('event-info/update', [HeroSectionController::class, 'eventUpdate'])->name('update.event');
+
+Route::get('event-organizer', [OrganizerController::class, 'index'])->name('event.organizer');
+Route::post('event-organizer', [OrganizerController::class, 'store']);
+Route::post('event-organizer/update', [OrganizerController::class, 'update'])->name('event.organizer.update');
+
+Route::get('events', [EventController::class, 'index'])->name('events');
+Route::get('event/create', [EventController::class, 'create'])->name('event.create');
+Route::post('event/create', [EventController::class, 'store']);
+Route::get('event/edit/{id}', [EventController::class, 'edit'])->name('event.edit');
+Route::post('event/update/{id}', [EventController::class, 'update'])->name('event.update');
+Route::post('event/delete/{id}', [EventController::class, 'destroy'])->name('event.delete');
+
+Route::get('social-media', [SocialMediaController::class, 'index'])->name('organizer.social.media');
+Route::post('social-media', [SocialMediaController::class, 'store']);
+Route::post('social-media/update', [SocialMediaController::class, 'update'])->name('social.media.update');
+
+Route::get('events/guests', [GuestController::class, 'index'])->name('guests');
+Route::get('events/guests/create', [GuestController::class, 'create'])->name('guest.create');
+Route::post('events/guests/create', [GuestController::class, 'store']);
+Route::get('events/guests/guest/edit/{id}', [GuestController::class, 'edit'])->name('guest.edit');
+Route::post('events/guests/guest/update/{id}', [GuestController::class, 'update'])->name('guest.update');
+Route::post('events/guests/guest/{id}', [GuestController::class, 'destroy'])->name('guest.delete');
 
 
 });

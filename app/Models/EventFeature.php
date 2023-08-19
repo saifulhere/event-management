@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Event;
 
-class BookEvent extends Model
+class EventFeature extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'event_id', 'guest_id', 'name', 'email', 'phone', 'image', 'number_of_people', 'payment_status'
+        'event_id', 'feature'
     ];
 
     public function event ()

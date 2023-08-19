@@ -48,9 +48,20 @@
                                         <div class="col-lg-4">
                                             <div class="sc-text">
                                                 <h4>When & Where</h4>
+                                                {{-- @if(isset($event))
+                                                    {{$event->title}}
+                                                @endif --}}
                                                 <ul class="">
-                                                    <li><i class="fa fa-clock-o"></i> 08:00 am - 10:00 AM</li>
-                                                    <li><i class="fa fa-map-marker"></i> 59 Breanne Canyon Suite, USA
+                                                    <li><i class="fa fa-clock-o"></i>@if(isset($event))
+                                                        {{$event->start_date}}
+                                                        @else
+                                                        08:00 am - 10:00 AM
+                                                    @endif </li>
+                                                    <li class="mt-2"><i class="fa fa-map-marker"></i>@if(isset($event))
+                                                        {{$event->location}}
+                                                        @else
+                                                        59 Breanne Canyon Suite, USA
+                                                    @endif
                                                     </li>
                                                 </ul>
                                             </div>

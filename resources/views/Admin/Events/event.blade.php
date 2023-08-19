@@ -145,7 +145,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="name">Event Start Date & Time</label>
-                        <input type="datetime-local" class="form-control" id="name" name="start_date" value="@if(isset($event)) {{ $event->start_date }} @endif" placeholder="Enter organizer name">
+                        <input type="datetime-local" class="form-control" id="name" name="start_date" value="@if(isset($event)){{$event->start_date}}@endif" placeholder="Enter organizer name">
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -157,7 +157,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="name">Booking Start Date & Time</label>
-                        <input type="datetime-local" class="form-control" id="name" name="booking_start" value="@if(isset($event)) {{ $event->booking_start }} @endif" placeholder="Enter organizer name">
+                        <input type="datetime-local" class="form-control" id="name" name="booking_start" value="@if(isset($event)){{$event->booking_start}}@endif" placeholder="Enter organizer name">
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -165,6 +165,29 @@
                         <label for="text">Booking End Date & Time</label>
                         <input type="datetime-local" class="form-control" id="email" name="booking_end" value="@if(isset($event)){{$event->booking_end}}@endif" placeholder="Organizer tagline...">
                     </div>
+                </div>
+                <div class="col-md-12">
+                    <h2>Event Features</h2>
+
+                    @if (isset($event) && $event->features()->count() > 0)
+                        @foreach ($event->features as $feature)
+                            <div>
+                                <label>Feature:</label>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <input type="text" class="form-control" name="features[{{ $feature->id }}][feature]" value="{{ $feature->feature }}">
+                                    <a class="items-center ml-3" href="{{ route('event.features.destroy', $feature->id)}}"><i class="fa-solid fa-trash-can text-danger"></i></a>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
+    
+                    <div id="features-container">
+                        <div class="form-group">
+                            <label for="features">Feature</label>
+                            <input type="text" name="new_features[]" class="form-control" placeholder="Add more feature">
+                        </div>
+                    </div> 
+                    <button type="button" id="add-feature-btn" class="btn btn-success" style="height: fit-content">Add Feature</button>       
                 </div>
                 <div class="col-md-12">
                     <div class="align-items-end">
@@ -180,5 +203,26 @@
     </div>
 </div>
 {{-- EVENT TIME, LOCATION AND OTHER NECESSARY INFORMATION END --}}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const addFeatureBtn = document.getElementById('add-feature-btn');
+        const featuresContainer = document.getElementById('features-container');
+
+        addFeatureBtn.addEventListener('click', function () {
+            const featureInput = document.createElement('input');
+            featureInput.setAttribute('type', 'text');
+            featureInput.setAttribute('name', 'new_features[]');
+            featureInput.setAttribute('class', 'form-control');
+            featureInput.setAttribute('placeholder', 'Add new feature');
+
+            const featureFormGroup = document.createElement('div');
+            featureFormGroup.setAttribute('class', 'form-group');
+            featureFormGroup.appendChild(featureInput);
+
+            featuresContainer.appendChild(featureFormGroup);
+        });
+    });
+</script>
 
 @endsection

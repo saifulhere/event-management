@@ -4,15 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Event;
 
-class BookEvent extends Model
+class SocialMedia extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'event_id', 'guest_id', 'name', 'email', 'phone', 'image', 'number_of_people', 'payment_status'
+        'organizer_id', 'facebook', 'instagram', 'twitter', 'linkedin'
     ];
+
+    public function organizer ()
+    {
+        return $this->belongsTo(Organizer::class);
+    }
 
     public function event ()
     {
