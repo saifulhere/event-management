@@ -39,4 +39,9 @@ class Event extends Model
         return $this->hasMany(EventFeature::class);
     }
 
+    public function eventGuests()
+    {
+        return $this->hasMany(EventGuest::class);
+    }
+
 }

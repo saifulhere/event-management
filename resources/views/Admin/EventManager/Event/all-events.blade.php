@@ -40,7 +40,9 @@
                   <th scope="row">{{$event->start_date}}</th>
                   <td>{{$event->booking_start}}</td>
                   <td>{{$event->location}}</td>
-                  <td>{{$event->phone}}</td>
+                  <td>
+                    <a class="btn btn-primary btn-sm" href="{{route('event.edit', $event->id)}}">Edit</a>
+                  </td>
                   {{-- <td>
                       <a href="#" class="btn btn-success text-white btn-sm">Edit</a>
                   </td>

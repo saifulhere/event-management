@@ -57,3 +57,5 @@
 
     Date: 20/08/2023
     **Events and Necessary Function Related to events are completed.
+    **Text Editor has been added to events form.
+    **Repeatable field for saving event's guests name in event form.

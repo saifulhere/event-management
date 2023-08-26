@@ -36,10 +36,10 @@
           <tbody>
               @foreach ($guests as $guest )
               <tr>
-                  <th scope="row">{{$guest->title}}</th>
-                  <th scope="row">{{$guest->start_date}}</th>
-                  <td>{{$guest->booking_start}}</td>
-                  <td>{{$guest->location}}</td>
+                  <th scope="row">{{ $guest->events->title }}</th>
+                  <th scope="row">{{$guest->name}}</th>
+                  <td>{{$guest->designation}}</td>
+                  <td>{{$guest->about}}</td>
                   <td>{{$guest->phone}}</td>
                   {{-- <td>
                       <a href="#" class="btn btn-success text-white btn-sm">Edit</a>

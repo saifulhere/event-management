@@ -10,6 +10,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use App\Models\EventFeature;
+use App\Models\EventGuest;
 
 class EventController extends Controller
 {
@@ -22,7 +23,7 @@ class EventController extends Controller
     {
         $organizer = Organizer::latest()->first();
         $user = auth()->user();
-        $events      = Event::where('user_id', $user->id)->paginate(10);
+        $events      = Event::with('eventGuests')->where('user_id', $user->id)->paginate(10);
         return view('Admin.Eventmanager.Event.all-events', compact('organizer', 'events'));
     }
 
@@ -61,7 +62,7 @@ class EventController extends Controller
             'organizer_id'  => $organizer->id,
             'title'         => strip_tags($request->title),
             'tagline'       => strip_tags($request->tagline),
-            'description'   => strip_tags($request->description),
+            'description'   => $request->description,
             'location'      => strip_tags($request->location),
             'start_date'    => $formattedStartDateTime,
             'end_date'      => $formattedEndDateTime,
@@ -109,6 +110,32 @@ class EventController extends Controller
             }
         }
 
+        $newGuestNames = $request->input('guest_name', []);
+        $newGuestDesignations = $request->input('guest_designation', []);
+        $newGuestAbout = $request->input('guest_about', []);
+        $newGuestImages = $request->file('guest_image', []);
+
+        foreach ($newGuestNames as $index => $newGuestName) {
+            if (!empty($newGuestName)) {
+                $guest = $event->eventGuests()->create([
+                    'event_id'      => $event->id,
+                    'organizer_id'  => $organizer->id,
+                    'name'          => $newGuestName,
+                    'designation'   => $newGuestDesignations[$index],
+                    'about'         => $newGuestAbout[$index],
+                ]);
+
+                if ($newGuestImages && isset($newGuestImages[$index])) {
+                    $file = $newGuestImages[$index];
+                    $file_name = time() . $file->getClientOriginalName();
+                    $file->storeAs('public', $file_name);
+                    $guest->profile = $file_name;
+                    $guest->save();
+                }
+                $guest->save();
+            }
+        }
+
         $event->save();
 
         if ( $event )
@@ -153,12 +180,13 @@ class EventController extends Controller
 
         $event->title       = strip_tags($request->title);
         $event->tagline     = strip_tags($request->tagline);
-        $event->description = strip_tags($request->description);
+        $event->description = $request->description;
         $event->location    = strip_tags($request->location);
         $event->start_date  = $formattedStartDateTime;
         $event->end_date    = $formattedEndDateTime;
         $event->booking_start   = $formattedBookingDateTime;
         $event->booking_end = $formattedBookingEndDateTime;
+
 
         $event->update();
 
@@ -197,7 +225,7 @@ class EventController extends Controller
             $file->storeAs('public', $file_name);
     
             // Update the file name in the database
-            $event->bg_image = $file_name;
+            $event->thumbnail = $file_name;
             $event->save();
         }
 
@@ -221,6 +249,65 @@ class EventController extends Controller
                 $event->features()->create(['feature' => $newFeature]);
             }
         }
+
+        $updatedGuestIds = $request->input('guest_id', []);
+        $updatedGuestNames = $request->input('update_guest_name', []);
+        $updatedGuestDesignations = $request->input('update_guest_designation', []);
+        $updatedGuestAbout = $request->input('update_guest_about', []);
+        $updatedGuestImages = $request->file('update_guest_image', []);
+
+        foreach ($updatedGuestIds as $index => $guestId) {
+            $guest = EventGuest::find($guestId);
+
+            if ($guest && $guest->event_id === $event->id) {
+                $oldImage = $guest->profile; // Store old image name
+                
+                $guest->name = $updatedGuestNames[$index];
+                $guest->designation = $updatedGuestDesignations[$index];
+                $guest->about = $updatedGuestAbout[$index];
+
+                if ($updatedGuestImages && isset($updatedGuestImages[$index])) {
+                    if ($oldImage) {
+                        // Delete old image from storage
+                        Storage::delete('public/' . $oldImage);
+                    }
+
+                    $file = $updatedGuestImages[$index];
+                    $file_name = time() . '_' . $file->getClientOriginalName();
+                    $file->storeAs('public', $file_name);
+                    $guest->profile = $file_name;
+                }
+
+                $guest->save();
+            }
+        }
+
+
+        $newGuestNames = $request->input('guest_name', []);
+        $newGuestDesignations = $request->input('guest_designation', []);
+        $newGuestAbout = $request->input('guest_about', []);
+        $newGuestImages = $request->file('guest_image', []);
+
+        foreach ($newGuestNames as $index => $newGuestName) {
+            if (!empty($newGuestName)) {
+                $guest = $event->eventGuests()->create([
+                    'event_id'      => $event->id,
+                    'name'          => $newGuestName,
+                    'designation'   => $newGuestDesignations[$index],
+                    'about'         => $newGuestAbout[$index],
+                ]);
+
+                if ($newGuestImages && isset($newGuestImages[$index])) {
+                    $file = $newGuestImages[$index];
+                    $file_name = time() . $file->getClientOriginalName();
+                    $file->storeAs('public', $file_name);
+                    $guest->profile = $file_name;
+                    $guest->save();
+                }
+                $guest->save();
+            }
+        }
+
 
         $update = $event->update();
         if ($update)

@@ -5,7 +5,7 @@
 <div class="card mt-10">
     <div class="card-body">
         <div class="text-center fw-bolder mb-2"><h1>Set Your Event</h1></div>
-        @if(session('event'))
+        @if(session('success'))
            <div class="alert alert-success text-center"> {{session('success')}} </div>
         @endif
         @if(session('wrong'))
@@ -38,7 +38,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="name">Event Short Description</label>
-                        <textarea type="text" class="form-control" id="name" rows="3" name="description" value="{{old('description')}}" placeholder="Enter event description..."></textarea>
+                        <textarea type="text" class="form-control" id="editor" rows="3" name="description" value="{{old('description')}}" placeholder="Enter event description..."></textarea>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -100,8 +100,49 @@
                         </div>
                     </div> 
                     <button type="button" id="add-feature-btn" class="btn btn-success" style="height: fit-content">Add Feature</button>       
+                
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-12 mt-10" id="">
+                    <h2>Event Guests</h2>
+
+                    @if (isset($event) && $event->features()->count() > 0)
+                        @foreach ($event->features as $feature)
+                            <div>
+                                <label>Feature:</label>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <input type="text" class="form-control" name="features[{{ $feature->id }}][feature]" value="{{ $feature->feature }}">
+                                    <a class="items-center ml-3" href="{{ route('event.features.destroy', $feature->id)}}"><i class="fa-solid fa-trash-can text-danger"></i></a>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
+    
+                    <div id="guests-container" class="bg-dark text-light p-10 mb-3">
+                        <!-- Default guest input fields -->
+                        <div class="row text-white mt-5">
+                            <div class="form-group col-md-6">
+                                <label for="guest_name">Guest Name</label>
+                                <input type="text" name="guest_name[]" class="form-control" placeholder="Enter guest name">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="guest_designation">Guest Designation</label>
+                                <input type="text" name="guest_designation[]" class="form-control" placeholder="Enter guest designation">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="guest_about">About Guest</label>
+                            <textarea name="guest_about[]" class="form-control" placeholder="Enter about guest"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="guest_image">Guest Image</label>
+                            <input type="file" name="guest_image[]" class="form-control-file">
+                        </div>
+                    </div>
+                    
+                    <button type="button" id="add-guest" class="btn btn-success" style="height: fit-content">Add Guest</button>       
+                
+                </div>
+                <div class="col-md-12 mt-5">
                     <div class="align-items-end">
                         @if(isset($event))
                         <button type="submit" class="btn btn-primary shadow-lg">Update</button>
@@ -115,7 +156,40 @@
     </div>
 </div>
 {{-- EVENT TIME, LOCATION AND OTHER NECESSARY INFORMATION END --}}
+<script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<script>
+    CKEDITOR.replace('editor');
+</script>
+<script>
+    $(document).ready(function() {
+        $('#add-guest').click(function() {
+            var guestHtml = `
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="guest_name">Guest Name</label>
+                        <input type="text" name="guest_name[]" class="form-control" placeholder="Enter guest name">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="guest_designation">Guest Designation</label>
+                        <input type="text" name="guest_designation[]" class="form-control" placeholder="Enter guest designation">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="guest_about">About Guest</label>
+                    <textarea name="guest_about[]" class="form-control" placeholder="Enter about guest"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="guest_image">Guest Image</label>
+                    <input type="file" name="guest_image[]" class="form-control-file">
+                </div>
+            `;
+
+            $('#guests-container').append(guestHtml);
+        });
+    });
+</script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const addFeatureBtn = document.getElementById('add-feature-btn');

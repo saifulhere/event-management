@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('organizer_id')->nullable();
             $table->string('title')->nullable();
             $table->string('tagline')->nullable();
-            $table->string('description')->nullable();
+            $table->longText('description')->nullable();
             $table->string('location')->nullable();
             $table->string('thumbnail')->nullable();
             $table->dateTime('start_date')->nullable();
