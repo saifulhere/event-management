@@ -3,9 +3,10 @@
 @include('Frontend.hero')
 @include('Frontend.count-down')
 @include('Frontend.about')
-@include('Frontend.event-time-organiger')
+{{-- @include('Frontend.event-time-organiger') --}}
+@include('Frontend.all-events')
 <!-- Team Member Section Begin -->
-<section class="team-member-section">
+{{-- <section class="team-member-section">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -156,7 +157,7 @@
             <span>Speaker</span>
         </div>
     </div>
-</section>
+</section> --}}
 <!-- Team Member Section End -->
 
 <!-- Schedule Section Begin -->

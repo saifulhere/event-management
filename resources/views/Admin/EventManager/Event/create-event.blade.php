@@ -23,6 +23,17 @@
         <form action="{{route('event.create')}}" method="POST" enctype="multipart/form-data" >
             @csrf
             <div class="row mt-10">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <select name="organizer_id" class="form-control" id="">
+                            <option value="">Select Organizer</option>
+                            @foreach ($organizers as $organizer)
+                                <option value="{{$organizer->id}}">{{$organizer->name}}</option>   
+                            @endforeach
+
+                        </select>
+                    </div>
+                </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="name">Event Title</label>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\BookEvent;
+use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
@@ -13,33 +14,27 @@ use App\Models\User;
 
 class BookEventController extends Controller
 {
-    public function __construct()
+    public function index(Event $event)
     {
-        $this->middleware(['auth']);
+        return view('Frontend.book-event', compact('event'));
     }
     
     public function store(Request $request)
     {
-        //'user_id', 'age', 'passing_year', 'quantity', 'payment_status', 'image'
         $request->validate([
-            'age'           => 'required|numeric',
-            'passing_year'  => 'required|numeric',
-            'quantity'      => 'required|numeric',
-            'image'         => 'image|mimes:jpg,png,webp|max:3072'
+            'name'          => 'required|numeric',
+            'email'         => 'required',
+            'number_of_people'  => 'required'
         ]);
-
-        $sanitizedAge           = strip_tags($request->age);
-        $sanitizedPassingYear   = strip_tags($request->passing_year);
-        $sanitizedQuantity      = strip_tags($request->quantity);
         
         $file = $request->file('image');
         $file_name = time() . $file->getClientOriginalName();
 
-        $image = Image::make($file);
-        $expectedWidth = 300; 
+        $image          = Image::make($file);
+        $expectedWidth  = 300;
         $expectedHeight = 350;
-        $actualWidth = $image->width(); 
-        $actualHeight = $image->height();
+        $actualWidth    = $image->width(); 
+        $actualHeight   = $image->height();
 
         if ($actualWidth !== $expectedWidth || $actualHeight !== $expectedHeight) {
             return redirect()
@@ -47,14 +42,17 @@ class BookEventController extends Controller
                 ->withErrors("The image dimensions should be {$expectedWidth}x{$expectedHeight} pixels.");
         }
         $file->storeAs('public', $file_name);
+        $paymentStatus      = 'pending';
 
         BookEvent::create([
-            'user_id'       => auth()->user()->id,
-            'age'           => $sanitizedAge,
-            'passing_year'  => $sanitizedPassingYear,
-            'qantity'       => $sanitizedQuantity,
-            'payment_status'=> 'pending',
-            'image'         => $file_name
+            'event_id'      => $request->event_id,
+            'guest_id'      => $request->guest_id,
+            'name'          => strip_tags($request->name),
+            'email'         => strip_tags($request->email),
+            'phone'         => strip_tags($request->phone),
+            'image'         => $file_name,
+            'number_of_people'  => strip_tags($request->number_of_people),
+            'payment_status'    => $paymentStatus,
         ]);
 
         return redirect()->back()->with('status', 'Event booked successful');

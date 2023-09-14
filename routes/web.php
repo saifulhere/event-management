@@ -64,6 +64,9 @@ Route::post('/password/forgot-password',[PasswordController::class, 'store'] )->
 Route::get('/password/reset/{token}', [ResetPasswordController::class, 'index'])->name('password.reset');
 Route::post('/passord/reset', [ResetPasswordController::class, 'store'])->name('password.update');
 
+//FORNTEND ROUTE
+Route::get('events/event/{id}', [HomeController::class, 'showEvent'])->name('show.event');
+
 
 //HERO SECTION MANAGEMENT
 Route::group(['prefix' => 'admin'], function(){
@@ -83,9 +86,12 @@ Route::post('organizer-info/update', [HeroSectionController::class, 'organizerUp
 Route::post('event-info', [HeroSectionController::class, 'event'])->name('event');
 Route::post('event-info/update', [HeroSectionController::class, 'eventUpdate'])->name('update.event');
 
-Route::get('event-organizer', [OrganizerController::class, 'index'])->name('event.organizer');
+Route::get('organizers', [OrganizerController::class, 'index'])->name('event.organizer');
+Route::get('event-organizer', [OrganizerController::class, 'create'])->name('organizer.create');
 Route::post('event-organizer', [OrganizerController::class, 'store']);
-Route::post('event-organizer/update', [OrganizerController::class, 'update'])->name('event.organizer.update');
+Route::get('organizer/edit/{id}', [OrganizerController::class, 'edit'])->name('organizer.edit');
+Route::post('event-organizer/update/{id}', [OrganizerController::class, 'update'])->name('event.organizer.update');
+Route::post('organizer/delete/{id}', [OrganizerController::class, 'destroy'])->name('organizer.destroy');
 
 Route::get('events', [EventController::class, 'index'])->name('events');
 Route::get('event/create', [EventController::class, 'create'])->name('event.create');
@@ -109,9 +115,13 @@ Route::post('events/guests/guest/{id}', [GuestController::class, 'destroy'])->na
 });
 
 //USER DASHBOARD ROUTE
-Route::group(['prefix' => 'user'], function(){
-    Route::post('/book-event', [BookEventController::class, 'store'])->name('book.event');
-    Route::get('/profile', [UserProfileController::class, 'index'])->name('user.profile');
-    Route::get('/edit/profile', [UserProfileController::class, 'edit'])->name('edit.profile');
-    Route::get('/booked/event', [BookEventController::class, 'bookedEvent'])->name('booked.event');
-});
+// Route::group(['prefix' => 'user'], function(){
+//     Route::post('/book-event', [BookEventController::class, 'store'])->name('book.event');
+//     Route::get('/profile', [UserProfileController::class, 'index'])->name('user.profile');
+//     Route::get('/edit/profile', [UserProfileController::class, 'edit'])->name('edit.profile');
+//     Route::get('/booked/event', [BookEventController::class, 'bookedEvent'])->name('booked.event');
+// });
+
+
+Route::get('events/{event}/book-event', [BookEventController::class, 'index'])->name('book.event');
+Route::post('events/book-event', [BookEventController::class, 'store'])->name('book.event.store');

@@ -29,12 +29,15 @@ class EventController extends Controller
 
     public function create ()
     {
-        return view('Admin.EventManager.Event.create-event');
+        $user           = auth()->user();
+        $organizers     = Organizer::where('user_id', $user->id)->get();
+        return view('Admin.EventManager.Event.create-event', compact('organizers'));
     }
 
     public function store (Request $request)
     {
         $validatedData = $request->validate([
+            'organizer_id'  => 'required',
             'title'         => 'required',
             'description'   => 'required',
             'location'      => 'required',
@@ -59,7 +62,7 @@ class EventController extends Controller
 
         $event = Event::create([
             'user_id'       => $user->id,
-            'organizer_id'  => $organizer->id,
+            'organizer_id'  => $request->organizer_id,
             'title'         => strip_tags($request->title),
             'tagline'       => strip_tags($request->tagline),
             'description'   => $request->description,
@@ -156,6 +159,7 @@ class EventController extends Controller
     public function update (Request $request, $id)
     {
         $validatedData = $request->validate([
+            'organizer_id'  => 'required',
             'title'         => 'required',
             'description'   => 'required',
             'location'      => 'required',
@@ -178,6 +182,7 @@ class EventController extends Controller
         $formattedBookingDateTime    = $bookingStart->format('Y-m-d H:i:s');
         $formattedBookingEndDateTime = $bookingEnd->format('Y-m-d H:i:s');
 
+
         $event->title       = strip_tags($request->title);
         $event->tagline     = strip_tags($request->tagline);
         $event->description = $request->description;
@@ -185,6 +190,7 @@ class EventController extends Controller
         $event->start_date  = $formattedStartDateTime;
         $event->end_date    = $formattedEndDateTime;
         $event->booking_start   = $formattedBookingDateTime;
+        $event->organizer_id    = $request->organizer_id;
         $event->booking_end = $formattedBookingEndDateTime;
 
 

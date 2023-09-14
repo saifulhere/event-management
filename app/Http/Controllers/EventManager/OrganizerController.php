@@ -18,8 +18,13 @@ class OrganizerController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $organizer = Organizer::find($user->id);
-        return view('Admin.EventManager.Organizer.organizer', compact('organizer'));
+        $organizers = Organizer::where('user_id', $user->id)->paginate(10);
+        return view('Admin.EventManager.Organizer.all-organizers', compact('organizers'));
+    }
+
+    public function create ()
+    {
+        return view('Admin.EventManager.Organizer.create-organizer');
     }
 
     public function store(Request $request)
@@ -83,6 +88,12 @@ class OrganizerController extends Controller
         }else {
             return redirect()->back()->with('wrong', 'Something went wrong!');
         }
+    }
+
+    public function edit ($id)
+    {
+        $organizer  = Organizer::find($id);
+        return view('Admin.EventManager.Organizer.edit-organizer', compact('organizer'));
     }
 
     public function update (Request $request)
