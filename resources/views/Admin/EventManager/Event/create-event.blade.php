@@ -37,10 +37,16 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="name">Event Title</label>
-                        <input type="text" class="form-control" id="name" name="title" value="{{ old('title')}}" placeholder="Enter event title">
+                        <input type="text" class="form-control" id="title" oninput="generateSlug()" name="title" value="{{ old('title')}}" placeholder="Enter event title">
                     </div>
                 </div>
                 <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="name">Event Slug</label>
+                        <input type="text" class="form-control" id="slug" name="slug" value="{{ old('slug')}}" placeholder="">
+                    </div>
+                </div>
+                <div class="col-md-12">
                     <div class="form-group">
                         <label for="name">Event Tagline</label>
                         <input type="text" class="form-control" id="name" name="tagline" value="{{ old('tagline')}}" placeholder="Enter event tagline">
@@ -222,4 +228,13 @@
     });
 </script>
 
+<script>
+    function generateSlug (){
+        const title     = document.getElementById('title').value;
+        const slugField = document.getElementById('slug');
+
+        const slug      = title.toLowerCase().trim().replace(/[^a-zA-Z0-9-]+/g, '-');
+        slugField.value = slug;
+    }
+</script>
 @endsection

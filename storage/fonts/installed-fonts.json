@@ -1,0 +1,17 @@
+{
+    "work sans": {
+        "normal": "C:\\xampp\\htdocs\\Laravel\\Event_Management\\storage\\fonts\/work_sans_normal_155638d82c044167a12fc15f085a09f9",
+        "500": "C:\\xampp\\htdocs\\Laravel\\Event_Management\\storage\\fonts\/work_sans_500_48a1fd6eacb93ead2ddb641222144bb1",
+        "600": "C:\\xampp\\htdocs\\Laravel\\Event_Management\\storage\\fonts\/work_sans_600_383cd0098d26ea6e6e8db3867335a761",
+        "bold": "C:\\xampp\\htdocs\\Laravel\\Event_Management\\storage\\fonts\/work_sans_bold_788e18efc0927851f7c2d4f7fc5a2e3f",
+        "800": "work_sans_800_9742d11547271278ea250b8ba5773377",
+        "900": "C:\\xampp\\htdocs\\Laravel\\Event_Management\\storage\\fonts\/work_sans_900_4995c575728d4f0a42b46f49c6b4de68",
+        "600_italic": "C:\\xampp\\htdocs\\Laravel\\Event_Management\\storage\\fonts\/work_sans_600_italic_28e7f98ec7c5b698a6b28ef8de7bb8ff"
+    },
+    "poppins": {
+        "normal": "C:\\xampp\\htdocs\\Laravel\\Event_Management\\storage\\fonts\/poppins_normal_ee697d7869cb745ccf3ccccc013145ad",
+        "500": "C:\\xampp\\htdocs\\Laravel\\Event_Management\\storage\\fonts\/poppins_500_fce53b208cddccda1573b7620b579598",
+        "600": "C:\\xampp\\htdocs\\Laravel\\Event_Management\\storage\\fonts\/poppins_600_9623fbc18c38938c2057a9aae8390a42",
+        "bold": "poppins_bold_8fe618268f56b4b8f1e70e87a9e99fc0"
+    }
+}

@@ -20,9 +20,10 @@ class HomeController extends Controller
         return view('Frontend.index', compact('hero', 'about',  'events'));
     }
 
-    public function showEvent ($id)
+    public function showEvent ($slug)
     {
-        $event      = Event::with('organizer')->find($id);
+        $event      = Event::with('organizer')->where('slug', $slug)->first();
+        // $event      = Event::with('organizer')->find($slug);
         return view('Frontend.event', compact('event'));
     }
 }

@@ -23,13 +23,30 @@
         <form action="{{route('event.update', $event->id)}}" method="POST" enctype="multipart/form-data" >
             @csrf
             <div class="row mt-10">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="form-group">
-                        <label for="name">Event Title</label>
-                        <input type="text" class="form-control" id="name" name="title" value="{{ $event->title}}" placeholder="Enter organizer name">
+                        <select name="organizer_id" class="form-control" id="">
+                            <option value="">Select Organizer</option>
+                            @foreach ($organizers as $organizer)
+                                <option value="{{$organizer->id}}">{{$organizer->name}}</option>   
+                            @endforeach
+
+                        </select>
                     </div>
                 </div>
                 <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="name">Event Title</label>
+                        <input type="text" class="form-control" id="title" name="title" value="{{ $event->title}}" placeholder="Enter organizer name">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="name">Event Slug</label>
+                        <input type="text" class="form-control" id="slug" name="slug" value="{{$event->slug}}" placeholder="">
+                    </div>
+                </div>
+                <div class="col-md-12">
                     <div class="form-group">
                         <label for="name">Event Tagline</label>
                         <input type="text" class="form-control" id="name" name="tagline" value="{{ $event->tagline}}" placeholder="Enter organizer name">
@@ -224,4 +241,13 @@
     });
 </script>
 
+<script>
+    function generateSlug (){
+        const title     = document.getElementById('title').value;
+        const slugField = document.getElementById('slug');
+
+        const slug      = title.toLowerCase().trim().replace(/[^a-zA-Z0-9-]+/g, '-');
+        slugField.value = slug;
+    }
+</script>
 @endsection

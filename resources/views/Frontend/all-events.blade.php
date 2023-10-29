@@ -25,7 +25,7 @@
                                             </div>
                                             <div class="col-lg-5">
                                                 <div class="sc-text">
-                                                    <a href="{{route('show.event', $event->id)}}">
+                                                    <a href="{{route('show.event', $event->slug)}}">
                                                         <h4 class="text-uppercase">
                                                             @if(isset($event))
                                                             {{$event->title}}
@@ -38,7 +38,7 @@
                                                     <p class="font-weight-light text-dark">{{ $event->tagline}}</p>
                                                     @endif
                                                     @if($event)
-                                                        <p>{!! $event->description !!}</p>
+                                                        <p>{!! mb_substr($event->description, 0, 100). ' ...' !!}</p>
                                                     @else
                                                     <p class="pt-3">Your innovation partner for web, mobile, 
                                                         and AI solutions. Transforming ideas into reality, driving success together.</p>
@@ -48,6 +48,9 @@
                                                         <li><strong>{{$event->organizer->name}}</strong>
                                                         </li>
                                                     </ul>
+                                                    <div class="mt-3">
+                                                        <a href="{{route('book.event', ['event' => $event->slug])}}" class="primary-btn">Join Event</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4">

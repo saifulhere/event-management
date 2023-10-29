@@ -18,7 +18,7 @@
                         {{$event->title}}
                         @else {{'event sub heading'}}
                     @endif</h2>
-                    <a href="{{route('book.event', ['event' => $event->id])}}" class="primary-btn">Join Event</a>
+                    <a href="{{route('book.event', ['event' => $event->slug])}}" class="primary-btn">Join Event</a>
                 </div>
             </div>
             <div class="col-lg-5">
@@ -55,7 +55,7 @@
                                             </div>
                                             <div class="col-lg-5">
                                                 <div class="sc-text">
-                                                    <a href="{{route('show.event', $event->id)}}">
+                                                    <a href="">
                                                         <h4 class="text-uppercase">
                                                             @if(isset($event))
                                                             {{$event->title}}
@@ -79,7 +79,7 @@
                                                         </li>
                                                     </ul>
                                                     <div class="mt-5">
-                                                        <a href="{{route('book.event', ['event' => $event->id])}}" class="primary-btn">Join Event</a>
+                                                        <a href="{{route('book.event', ['event' => $event->slug])}}" class="primary-btn">Join Event</a>
                                                     </div>
                                                 </div>
                                             </div>

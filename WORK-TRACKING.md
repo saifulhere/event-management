@@ -59,3 +59,15 @@
     **Events and Necessary Function Related to events are completed.
     **Text Editor has been added to events form.
     **Repeatable field for saving event's guests name in event form.
+
+
+    ***Requirements
+    1. Payment Mode
+        - Bkash
+        - Nagad
+        - Rocket
+    2. Transaction ID
+    3. Payment Account Number
+    4. Use Slug in Url rahter Event ID.
+
+    {{route('show.event', ['event' => $event->slug])}}

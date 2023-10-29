@@ -1,7 +1,7 @@
 @extends('layouts.theme')
 @section('frontend')
 @include('Frontend.hero')
-@include('Frontend.count-down')
+{{-- @include('Frontend.count-down') --}}
 @include('Frontend.about')
 {{-- @include('Frontend.event-time-organiger') --}}
 @include('Frontend.all-events')
@@ -160,7 +160,7 @@
 </section> --}}
 <!-- Team Member Section End -->
 
-<!-- Schedule Section Begin -->
+{{-- <!-- Schedule Section Begin -->
 <section class="schedule-section spad">
     <div class="container">
         <div class="row">
@@ -783,7 +783,7 @@
         </div>
     </div>
 </section>
-<!-- Schedule Section End -->
+<!-- Schedule Section End --> --}}
 
 <!-- Pricing Section Begin -->
 <section class="pricing-section set-bg spad" data-setbg="{{asset('frontend_assets/img/pricing-bg.jpg')}}">
@@ -898,7 +898,7 @@
 <!-- latest BLog Section End -->
 
 <!-- Newslatter Section Begin -->
-<section class="newslatter-section">
+{{-- <section class="newslatter-section">
     <div class="container">
         <div class="newslatter-inner set-bg" data-setbg="{{asset('frontend_assets/img/newslatter-bg.jpg')}}">
             <div class="ni-text">
@@ -911,7 +911,7 @@
             </form>
         </div>
     </div>
-</section>
+</section> --}}
 <!-- Newslatter Section End -->
 
 <!-- Contact Section Begin -->
@@ -926,7 +926,7 @@
                 <div class="cs-text">
                     <div class="ct-address">
                         <span>Address:</span>
-                        <p>01 Pascale Springs Apt. 339, NY City <br />United State</p>
+                        <p>Sreemangal-3210, Moulvibazar Sylhet,  <br />Bangladesh</p>
                     </div>
                     <ul>
                         <li>
@@ -935,12 +935,12 @@
                         </li>
                         <li>
                             <span>Email:</span>
-                            info.colorlib@gmail.com
+                            info@w3relations.com
                         </li>
                     </ul>
                     <div class="ct-links">
                         <span>Website:</span>
-                        <p>https://conference.colorlib.com</p>
+                        <p>https://w3relations.com/</p>
                     </div>
                 </div>
             </div>

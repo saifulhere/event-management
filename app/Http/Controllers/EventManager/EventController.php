@@ -39,6 +39,7 @@ class EventController extends Controller
         $validatedData = $request->validate([
             'organizer_id'  => 'required',
             'title'         => 'required',
+            'slug'          => 'required',
             'description'   => 'required',
             'location'      => 'required',
             'start_date'    => 'required|date_format:Y-m-d\TH:i',
@@ -64,6 +65,7 @@ class EventController extends Controller
             'user_id'       => $user->id,
             'organizer_id'  => $request->organizer_id,
             'title'         => strip_tags($request->title),
+            'slug'          => strip_tags($request->slug),
             'tagline'       => strip_tags($request->tagline),
             'description'   => $request->description,
             'location'      => strip_tags($request->location),
@@ -153,14 +155,16 @@ class EventController extends Controller
     public function edit (Request $request, $id)
     {
         $event = Event::find($id);
-        return view('Admin.EventManager.Event.edit-event', compact('event'));
+        $user           = auth()->user();
+        $organizers     = Organizer::where('user_id', $user->id)->get();
+        return view('Admin.EventManager.Event.edit-event', compact('event', 'organizers'));
     }
 
     public function update (Request $request, $id)
     {
         $validatedData = $request->validate([
-            'organizer_id'  => 'required',
             'title'         => 'required',
+            'slug'          => 'required',
             'description'   => 'required',
             'location'      => 'required',
             'start_date'    => 'required|date_format:Y-m-d\TH:i',
@@ -184,6 +188,7 @@ class EventController extends Controller
 
 
         $event->title       = strip_tags($request->title);
+        $event->slug        = strip_tags($request->slug);
         $event->tagline     = strip_tags($request->tagline);
         $event->description = $request->description;
         $event->location    = strip_tags($request->location);

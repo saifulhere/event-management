@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="{{asset('frontend_assets/css/magnific-popup.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('frontend_assets/css/slicknav.min.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('frontend_assets/css/style.css')}}" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
 </head>
 
 <body>
@@ -53,7 +54,7 @@
                                     <li><a href="#">Harriet</a></li>
                                 </ul>
                             </li>
-                            <li><a href="./schedule.html">Schedule</a></li>
+                            <li><a href="{{route('show.ticket')}}">Dowonload</a></li>
                             <li><a href="./contact.html">Contacts</a></li>
                         </ul>
                     </nav>
