@@ -31,10 +31,10 @@
               <th scope="col">Event Title</th>
               <th scope="col">Phone</th>
               <th scope="col">N.O.People</th>
-              <th scope="col">Payment Method</th>
+              <th scope="col">Paid Amount</th>
               <th scope="col">Trxn ID</th>
-              <th scope="col">Payment Number</th>
               <th scope="col">Payment Status</th>
+              <th scope="col">Payment Method</th>
             </tr>
           </thead>
           <tbody>
@@ -45,10 +45,10 @@
                   <td>{{$participant->event->title}}</td>
                   <td>{{$participant->phone}}</td>
                   <td>{{$participant->number_of_people}}</td>
-                  <td>{{$participant->payment_method}}</td>
+                  <td>{{$participant->amount}}</td>
                   <td>{{$participant->trxn_id}}</td>
-                  <td>{{$participant->payment_number}}</td>
                   <td>{{$participant->payment_status}}</td>
+                  <td>{{$participant->payment_method}}</td>
                   {{-- <td>
                     <a class="btn btn-primary btn-sm" href="{{route('event.edit', $event->id)}}">Edit</a>
                   </td> --}}

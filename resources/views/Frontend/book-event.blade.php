@@ -50,7 +50,7 @@
                 </div>
             @endif
 
-            <form action="{{route('book.event.store')}}" method="POST" enctype="multipart/form-data" >
+            <form action="{{route('bkash-create-payment')}}" method="POST" enctype="multipart/form-data" >
                 @csrf
                 <div class="row mt-10" id="form1">
                     <div class="col-md-6">
@@ -84,60 +84,11 @@
                             <input type="number" class="form-control" id="email" name="number_of_people" value="{{ old('number_of_people')}}" placeholder="Event location...">
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="text">Your Image</label>
-                            <input type="file" class="form-control" name="image" value="{{ old('image')}}">
-                        </div>
-                    </div>
-                    <div class="col-md-8 mt-3">
-                        <div class="">
-                            {{-- <button style="border: none;" class="primary-btn">Book Event</button> --}}
-                        </div>
-                    </div>
-                    {{-- <div class="col-md-4 mt-3">
+                    <div class="col-md-6 mt-3">
                         <div class="d-flex justify-content-end">
-                            <button class="primary-btn" style="width: 168.61px;">Book Event</button>
-                        </div>
-                    </div> --}}
-                    <div class="col-md-4 mt-3">
-                        <div class="d-flex justify-content-end">
-                            <button type="button" style="border: none;" id="nextButton" class="primary-btn justify-content-end">Next <i class="fa-solid fa-arrow-right ml-3"></i></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-10 form-2" id="form2">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="name">Payment Method</label>
-                            <select name="payment_method" class="form-control" id="">
-                                <option value="">Select Payment Method</option>
-                                @foreach ($payment_methods as $payment_method)
-                                    <option value="{{$payment_method->payment_method}}">{{$payment_method->payment_method}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="trxn_id">Transaction ID</label>
-                            <input type="text" class="form-control" name="trxn_id" value="{{ old('trxn_id')}}" placeholder="Enter transaction id">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="text">Your Phone</label>
-                            <input type="text" class="form-control" name="payment_number" value="{{ old('payment_number')}}" placeholder="Enter payment number">
-                        </div>
-                    </div>
-                    <div class="col-md-8 mt-3">
-                        <div class="">
-                            <button type="button" id="previousButton" style="border: none;" class="primary-btn">Go Back</button>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mt-3">
-                        <div class="d-flex justify-content-end">
-                            <button type="submit" style="border: none;" class="primary-btn justify-content-end">Submit</button>
+                            <button type="submit" style="border: none;" class="">
+                                <img src="https://merchantdemo.sandbox.bka.sh/frontend/resource/img/bkash_payment.png" alt="">
+                            </button>
                         </div>
                     </div>
                 </div>

@@ -22,6 +22,7 @@ use App\Http\Controllers\EventManager\SocialMediaController;
 use App\Http\Controllers\FrontEnd\DownloadController;
 use App\Http\Controllers\User\BookEventController;
 use App\Http\Controllers\User\UserProfileController;
+use App\Http\Controllers\BkashTokenizePaymentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -153,4 +154,16 @@ Route::group(['prefix' => 'events/tickets'], function(){
     Route::get('ticket/{id}', [DownloadController::class, 'pdfConvert'])->name('pdf.convert');
     Route::get('ticket/verify/{id}', [DownloadController::class, 'verify'])->name('ticket.verify');
 });
+
+//Bkash payment gateway integration
+Route::get('/bkash/payment', [BkashTokenizePaymentController::class,'index']);
+Route::post('/bkash/create-payment', [BkashTokenizePaymentController::class,'createPayment'])->name('bkash-create-payment');
+Route::get('/bkash/callback', [BkashTokenizePaymentController::class,'callBack'])->name('bkash-callBack');
+//bkash/refund
+//search payment
+Route::get('/bkash/search/{trxID}', [BkashTokenizePaymentController::class,'searchTnx'])->name('bkash-serach');
+
+// refund payment routes
+Route::get('/bkash/refund', [BkashTokenizePaymentController::class,'refund'])->name('bkash-refund');
+Route::get('/bkash/refund/status', [BkashTokenizePaymentController::class,'refundStatus'])->name('bkash-refund-status');
 
