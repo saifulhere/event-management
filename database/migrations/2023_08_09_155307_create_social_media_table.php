@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('social_media', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('event_id')->nullable();
             $table->unsignedBigInteger('organizer_id')->nullable();
             $table->string('facebook')->nullable();
             $table->string('instagram')->nullable();

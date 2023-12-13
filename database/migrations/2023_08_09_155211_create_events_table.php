@@ -26,6 +26,11 @@ return new class extends Migration
             $table->dateTime('end_date')->nullable();
             $table->dateTime('booking_start')->nullable();
             $table->dateTime('booking_end')->nullable();
+            $table->string('slug')->nullable();
+            $table->string('payment_method')->nullable();
+            $table->string('trxn_id')->nullable();
+            $table->string('payment_id')->nullable();
+            $table->integer('amount')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
