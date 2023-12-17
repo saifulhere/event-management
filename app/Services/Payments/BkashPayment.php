@@ -38,18 +38,19 @@ class BkashPayment extends Payment
         return parent::paymentExecution($request);
     }
 
-    public static function cancelPayment()
+    public static function callback($request)
     {
-        return parent::paymentCancel();
+        if ($request->status == 'success'){
+
+            return parent::paymentExecution($request);
+
+        }elseif ($request->status == 'cancel'){
+
+            return parent::cancelPayment($request);
+
+        }else{
+            return parent::failurePayment($request);
+        }
     }
 
-    public static function failurePayment()
-    {
-        return parent::paymentFailure();
-    }
-
-    public static function searchTrnx($trxID)
-    {
-        return parent::paymentSearch($trxID);
-    }
 }

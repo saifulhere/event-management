@@ -47,7 +47,11 @@
                   <td>{{$participant->number_of_people}}</td>
                   <td>{{$participant->amount}}</td>
                   <td>{{$participant->trxn_id}}</td>
-                  <td>{{$participant->payment_status}}</td>
+                  @if($participant->payment_status === 'Cancel!')
+                  <td class="bg-danger text-white">{{$participant->payment_status}}</td>
+                  @else
+                    <td class="bg-success">{{$participant->payment_status}}</td>
+                  @endif
                   <td>{{$participant->payment_method}}</td>
                   {{-- <td>
                     <a class="btn btn-primary btn-sm" href="{{route('event.edit', $event->id)}}">Edit</a>

@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use Karim007\LaravelBkashTokenize\Facade\BkashPaymentTokenize;
+use Karim007\LaravelBkashTokenize\Facade\BkashRefundTokenize;
 use App\Models\BookEvent;
 
 class Payment
@@ -31,11 +32,11 @@ class Payment
 
             if($bookEvent->save()){
 
-                return $response ;
+                return redirect()->away($response['bkashURL']);
 
             }else{
 
-                return redirect()->back();
+                return redirect()->back()->with('error-alert2', $response['statusMessage']);
             }
         }
     }
@@ -65,25 +66,68 @@ class Payment
             } 
         }
 
-        return BkashPaymentTokenize::failure($response['statusMessage']);
+        $failure = BkashPaymentTokenize::failure($response['statusMessage']);
+
+        dd($failure);
 
     }
 
 
-    public static function paymentCancel()
+    public static function cancelPayment($request)
     {
-        return BkashPaymentTokenize::cancel('Your payment is canceled');
+        $bookEvent = BookEvent::where('payment_id' , $request->paymentID)->first();
+
+        if ($bookEvent) {
+
+            $bookEvent->update([
+                'payment_status' => 'Cancel!'
+            ]);
+
+            return BkashPaymentTokenize::cancel('Your payment is canceled');
+        } 
+
     }
 
-    public static function paymentFailure()
+    public static function failurePayment($request)
     {
-        return BkashPaymentTokenize::failure('Your transaction is failed');
+        $bookEvent = BookEvent::where('payment_id' , $request->paymentID)->first();
+
+        if ($bookEvent) {
+
+            $bookEvent->update([
+                'payment_status' => 'Failure'
+            ]);
+
+            return BkashPaymentTokenize::failure('Your transaction is failed');
+
+        } 
+
     }
 
-    public static function paymentSearch($trxID)
+    public function searchTrnx($trxID)
     {
         return BkashPaymentTokenize::searchTransaction($trxID);
     }
+
+
+    // public function refund(Request $request)
+    // {
+    //     $paymentID='Your payment id';
+    //     $trxID='your transaction no';
+    //     $amount=5;
+    //     $reason='this is test reason';
+    //     $sku='abc';
+    //     //response
+    //     return BkashRefundTokenize::refund($paymentID,$trxID,$amount,$reason,$sku);
+    //     //return BkashRefundTokenize::refund($paymentID,$trxID,$amount,$reason,$sku, 1); //last parameter is your account number for multi account its like, 1,2,3,4,cont..
+    // }
+    // public function refundStatus(Request $request)
+    // {
+    //     $paymentID='Your payment id';
+    //     $trxID='your transaction no';
+    //     return BkashRefundTokenize::refundStatus($paymentID,$trxID);
+    //     //return BkashRefundTokenize::refundStatus($paymentID,$trxID, 1); //last parameter is your account number for multi account its like, 1,2,3,4,cont..
+    // }
 
 
 }
