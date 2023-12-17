@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/famoust1/public_html/eventbookingbd.com
+    - /bin/cp * $DEPLOYPATH
