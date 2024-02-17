@@ -22,7 +22,7 @@ class SocialMediaController extends Controller
         if ($organizer){
             $socialMedia = SocialMedia::where('organizer_id', $organizer->id)->first();
         }else {
-            return view('Admin.EventManager.Organizer.social-media', compact('socialMedia'));
+            return view('Admin.EventManager.Organizer.social-media');
         }
 
         return view('Admin.EventManager.Organizer.social-media', compact('socialMedia'));

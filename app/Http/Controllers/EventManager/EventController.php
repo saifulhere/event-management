@@ -24,7 +24,7 @@ class EventController extends Controller
         $organizer = Organizer::latest()->first();
         $user = auth()->user();
         $events      = Event::with('eventGuests')->where('user_id', $user->id)->paginate(10);
-        return view('Admin.Eventmanager.Event.all-events', compact('organizer', 'events'));
+        return view('Admin.EventManager.Event.all-events', compact('organizer', 'events'));
     }
 
     public function create ()
