@@ -15,7 +15,7 @@ class HomeController extends Controller
     {
         $hero = Hero::find(1);
         $about = About::with('features')->find(1);
-        // $organizer = Organizer::latest()->first();
+        $organizer = Organizer::latest()->first();
         $events      = Event::with('features', 'organizer')->get();
         return view('Frontend.index', compact('hero', 'about',  'events'));
     }
