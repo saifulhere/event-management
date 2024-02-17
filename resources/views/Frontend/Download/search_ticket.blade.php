@@ -16,16 +16,10 @@
                             <label for="name">Payment Number</label>
                             <input type="text" class="form-control" value="{{old('payment_number')}}" id="payment_number" name="payment_number">
                             @error('guest_id')
-                                {{$message}}
+                            {{$message}}
                             @enderror
                         </div>
                     </div>
-                    {{-- <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="text">Your Phone</label>
-                            <input type="text" class="form-control" name="payment_number" value="{{ old('payment_number')}}" placeholder="Enter Payment Number">
-                        </div>
-                    </div> --}}
                     <div class="col-md-12 mt-3">
                         <div class="d-flex justify-content-end">
                             <button type="submit" style="border: none; border-radius:.25rem; height:fit-content;" class="primary-btn form-control">Search Ticket</button>
@@ -39,22 +33,22 @@
     <div class="d-flex justify-content-center mt-3">
         @if(session('ticket'))
         @php
-            $ticket = session('ticket');
+        $ticket = session('ticket');
         @endphp
-            <div>
-                <div class="name">
-                    <h2>{{$ticket->event->title}}</h2>
-                </div>
-                <div>
-                    <h5>
-                        {{$ticket->name}}
-                    </h5>
-                    <p>{{$ticket->phone}}</p>
-                </div>
-                <div>
-                    <a href="{{route('pdf.convert', $ticket->id)}}" type="submit" style="border: none; border-radius:.25rem; height:fit-content;" class="primary-btn form-control">Download</a>
-                </div>
+        <div>
+            <div class="name">
+                <h2>{{$ticket->event->title}}</h2>
             </div>
+            <div>
+                <h5>
+                    {{$ticket->name}}
+                </h5>
+                <p>{{$ticket->phone}}</p>
+            </div>
+            <div>
+                <a href="{{route('pdf.convert', $ticket->id)}}" type="submit" style="border: none; border-radius:.25rem; height:fit-content;" class="primary-btn form-control">Download</a>
+            </div>
+        </div>
         @endif
     </div>
 </div>

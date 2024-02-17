@@ -4,23 +4,25 @@
 {{-- EVENT TIME, LOCATION AND OTHER NECESSARY INFORMATION START --}}
 <div class="card mt-10">
     <div class="card-body">
-        <div class="text-center fw-bolder mb-2"><h1>Set Your Event</h1></div>
+        <div class="text-center fw-bolder mb-2">
+            <h1>Set Your Event</h1>
+        </div>
         @if(session('success'))
-           <div class="alert alert-success text-center"> {{session('success')}} </div>
+        <div class="alert alert-success text-center"> {{session('success')}} </div>
         @endif
         @if(session('wrong'))
         <div class="alert alert-danger text-center"> {{session('wrong')}} </div>
-     @endif
-        @if($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
         @endif
-        <form action="{{route('event.create')}}" method="POST" enctype="multipart/form-data" >
+        @if($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+        <form action="{{route('event.create')}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row mt-10">
                 <div class="col-md-12">
@@ -28,7 +30,7 @@
                         <select name="organizer_id" class="form-control" id="">
                             <option value="">Select Organizer</option>
                             @foreach ($organizers as $organizer)
-                                <option value="{{$organizer->id}}">{{$organizer->name}}</option>   
+                            <option value="{{$organizer->id}}">{{$organizer->name}}</option>
                             @endforeach
 
                         </select>
@@ -99,25 +101,25 @@
                     <h2>Event Features</h2>
 
                     @if (isset($event) && $event->features()->count() > 0)
-                        @foreach ($event->features as $feature)
-                            <div>
-                                <label>Feature:</label>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <input type="text" class="form-control" name="features[{{ $feature->id }}][feature]" value="{{ $feature->feature }}">
-                                    <a class="items-center ml-3" href="{{ route('event.features.destroy', $feature->id)}}"><i class="fa-solid fa-trash-can text-danger"></i></a>
-                                </div>
-                            </div>
-                        @endforeach
+                    @foreach ($event->features as $feature)
+                    <div>
+                        <label>Feature:</label>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <input type="text" class="form-control" name="features[{{ $feature->id }}][feature]" value="{{ $feature->feature }}">
+                            <a class="items-center ml-3" href="{{ route('event.features.destroy', $feature->id)}}"><i class="fa-solid fa-trash-can text-danger"></i></a>
+                        </div>
+                    </div>
+                    @endforeach
                     @endif
-    
+
                     <div id="features-container">
                         <div class="form-group">
                             <label for="features">Feature</label>
                             <input type="text" name="new_features[]" class="form-control" placeholder="Add more feature">
                         </div>
-                    </div> 
-                    <button type="button" id="add-feature-btn" class="btn btn-success" style="height: fit-content">Add Feature</button>       
-                
+                    </div>
+                    <button type="button" id="add-feature-btn" class="btn btn-success" style="height: fit-content">Add Feature</button>
+
                 </div>
                 <div class="col-md-12 mt-10" id="">
                     <h2>Event Guests</h2>
@@ -133,7 +135,7 @@
                             </div>
                         @endforeach
                     @endif
-    
+
                     <div id="guests-container" class="bg-dark text-light p-10 mb-3">
                         <!-- Default guest input fields -->
                         <div class="row text-white mt-5">
@@ -155,9 +157,9 @@
                             <input type="file" name="guest_image[]" class="form-control-file">
                         </div>
                     </div>
-                    
-                    <button type="button" id="add-guest" class="btn btn-success" style="height: fit-content">Add Guest</button>       
-                
+
+                    <button type="button" id="add-guest" class="btn btn-success" style="height: fit-content">Add Guest</button>
+
                 </div>
                 <div class="col-md-12 mt-5">
                     <div class="align-items-end">
@@ -178,6 +180,7 @@
 
 <script>
     CKEDITOR.replace('editor');
+
 </script>
 <script>
     $(document).ready(function() {
@@ -206,13 +209,14 @@
             $('#guests-container').append(guestHtml);
         });
     });
+
 </script>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         const addFeatureBtn = document.getElementById('add-feature-btn');
         const featuresContainer = document.getElementById('features-container');
 
-        addFeatureBtn.addEventListener('click', function () {
+        addFeatureBtn.addEventListener('click', function() {
             const featureInput = document.createElement('input');
             featureInput.setAttribute('type', 'text');
             featureInput.setAttribute('name', 'new_features[]');
@@ -226,15 +230,17 @@
             featuresContainer.appendChild(featureFormGroup);
         });
     });
+
 </script>
 
 <script>
-    function generateSlug (){
-        const title     = document.getElementById('title').value;
+    function generateSlug() {
+        const title = document.getElementById('title').value;
         const slugField = document.getElementById('slug');
 
-        const slug      = title.toLowerCase().trim().replace(/[^a-zA-Z0-9-]+/g, '-');
+        const slug = title.toLowerCase().trim().replace(/[^a-zA-Z0-9-]+/g, '-');
         slugField.value = slug;
     }
+
 </script>
 @endsection

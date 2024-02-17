@@ -30,12 +30,12 @@
                     </p>
                     <ul>
                         @if(isset($about) && !empty($about->features))
-                            @foreach ($about->features as $feature)
-                                <li><span class="icon_check"></span> {{ $feature->feature }}</li>
-                            @endforeach
-                        
+                        @foreach ($about->features as $feature)
+                        <li><span class="icon_check"></span> {{ $feature->feature }}</li>
+                        @endforeach
+
                         @else
-                            <li><span class="icon_check"></span> Event Features goes here </li>
+                        <li><span class="icon_check"></span> Event Features goes here </li>
                         @endif
                     </ul>
                     <a href="#" class="ha-btn">Discover Now</a>

@@ -40,15 +40,17 @@
             @if(session('wrong'))
             <div class="alert alert-danger text-center"> {{session('wrong')}} </div>
         @endif
+        @isset($errors)
             @if($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
             @endif
+        @endisset
 
             <form action="{{route('bkash-create-payment')}}" method="POST" enctype="multipart/form-data" >
                 @csrf

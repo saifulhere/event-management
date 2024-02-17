@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\Events\JoinEventController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+Route::get('csrf-token', function () {
+    return response()->json(['token' => csrf_token()]);
+})->name('token');
+
+Route::group(['prefix' => 'v1'], function(){
+    Route::get('all-events', [JoinEventController::class, 'index']);
+    Route::post('book-event', [JoinEventController::class, 'store']);
 });

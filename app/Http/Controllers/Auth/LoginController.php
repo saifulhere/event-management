@@ -8,16 +8,13 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['guest']);
+    }
+
     protected function authenticated(Request $request, $user)
     {
-        // if (!$user->hasVerifiedEmail()) {
-        //     $user->sendEmailVerificationNotification();
-        //     Auth::logout();
-
-        //     return redirect()->route('verification.notice')
-        //         ->with('warning', 'You need to verify your email first. We have sent you another verification email.');
-        // }
-
         $userType = $user->user_type;
 
         if ($userType === 'admin' || $userType === 'manager') {
@@ -31,10 +28,6 @@ class LoginController extends Controller
         }
     }
 
-    public function __construct()
-    {
-        $this->middleware(['guest']);
-    }
     public function index()
     {
         return view('Auth.login');

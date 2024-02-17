@@ -12,7 +12,7 @@
         "karim007/laravel-bkash": "^2.0",
         "karim007/laravel-bkash-tokenize": "^2.2",
         "laravel/framework": "^9.19",
-        "laravel/sanctum": "^3.0",
+        "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.7",
         "laravel/ui": "^4.2",
         "simplesoftwareio/simple-qrcode": "^4.2"
