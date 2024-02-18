@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ShopifyAuthController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\Passwords\PasswordController;
@@ -35,6 +36,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/shopify/oauth', [ShopifyAuthController::class, 'redirectToShopify'])->name('shopify.oauth');
+Route::get('/shopify/callback', [ShopifyAuthController::class, 'handleShopifyCallback'])->name('shopify.callback');
 //FRONTEND ROUTES
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
