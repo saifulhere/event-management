@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class ShopifyAuthController extends Controller
 {
-    public function handle (Request $request)
+    public function redirectToShopify (Request $request)
     {
         dd($request);
     }
