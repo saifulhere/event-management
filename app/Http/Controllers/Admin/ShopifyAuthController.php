@@ -14,7 +14,7 @@ class ShopifyAuthController extends Controller
         $appkey = $request->input('appkey');
         $callbackUrl = route('shopify.callback');
         $authorizationUrl = 'https://'.$handle.'.myshopline.com/admin/oauth-web' .
-        '?appkey=' . $appkey .'?responseType=code'.
+        '?appKey=' . $appkey .'?responseType=code'.
         '&scope=' . 'read_products' . // The requested scopes
         '&redirect_uri=' . url('https://www.eventbookingbd.com/shopify/callback');
 
