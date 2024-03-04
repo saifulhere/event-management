@@ -24,5 +24,6 @@ Route::get('csrf-token', function () {
 
 Route::group(['prefix' => 'v1'], function(){
     Route::get('all-events', [JoinEventController::class, 'index']);
+    Route::get('all-events/{slug}', [JoinEventController::class, 'showEvent']);
     Route::post('book-event', [JoinEventController::class, 'store']);
 });

@@ -24,8 +24,8 @@ class JoinEventController extends Controller
     public function showEvent ($slug)
     {
         $event      = Event::with('organizer')->where('slug', $slug)->first();
-        // $event      = Event::with('organizer')->find($slug);
-        return view('Frontend.event', compact('event'));
+        
+        return response()->json($event);
     }
     
     public function store(Request $request)

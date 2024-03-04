@@ -37,8 +37,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/shopify/oauth', [ShopifyAuthController::class, 'redirectToShopify'])->name('shopify.oauth');
-Route::get('/shopify/callback', [ShopifyAuthController::class, 'handleShopifyCallback'])->name('shopify.callback');
 //FRONTEND ROUTES
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
